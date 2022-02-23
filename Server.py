@@ -1,6 +1,10 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+import sqlite3 
+import pdb
 
+con = sqlite3.connect('Data.sqlite')
+cur = con.cursor()                  #vytvarame cursor pre ziskanie dat z databazy
 
 class Server(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -14,7 +18,14 @@ class Server(BaseHTTPRequestHandler):
     # GET sends back a Hello world message
     def do_GET(self):
         self._set_headers()
-        self.wfile.write(json.dumps({'hello': 'world', 'received': 'ok'}).encode())
+        
+        zlist = self.path.split("=")
+        print(zlist[1])
+
+        cur.execute("select * from Data where ProductCategory=:searchterm", {"searchterm": zlist[1]})
+        dtbdata = cur.fetchall()
+
+        self.wfile.write(json.dumps(dtbdata).encode())
         
     # POST echoes the message adding a JSON field
     def do_POST(self):
