@@ -54,7 +54,7 @@
       $("#searchForm").submit(function(e) {
         e.preventDefault();
         var str = $("#searchText").val()
-        $.get( "http://localhost:1234?searchtext="+str, function(data){
+        $.get( "http://localhost:1336?searchtext="+str, function(data){
           console.log(data);
         });
       });
