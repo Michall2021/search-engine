@@ -6,3 +6,12 @@
 .searchWindow {
     margin-top: 70px;    
 }
+
+.searchResult {
+    margin-top: 20px;
+    border-style: solid;
+    border-top-color: lightgrey;
+    border-bottom-color: lightgrey;
+    border: 1px;
+
+}
