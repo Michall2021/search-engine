@@ -43,19 +43,28 @@
                         Enter keyword(s) or insert block of text
                         </div>                          
                     </div>
+                  <div id="searchResults">
+                  </div>
                 </div>                              
                 <div class="col-1">        
                 </div>                                                               
             </div>            
         </div>
-    
         
     <script>
-      $("#searchForm").submit(function(e) {
+      $("#searchForm").submit( function(e) {
         e.preventDefault();
         var str = $("#searchText").val()
         $.get( "http://localhost:1336?searchtext="+str, function(data){
-          console.log(data);
+          $("#searchResults").empty();
+          for (let x of data) {            
+            let line1 = "<div id=\x22Res\x22 class=\x22searchResult\x22>";              
+            let line2 = "<h3>"+x.Product+"</h3>";
+            let line3 = "Quantity: "+ x.Quantity + "<br>";            
+            let line4 = "Category: "+ x.ProductCategory;            
+            let line5 = "</div>";
+            $("#searchResults").append(line1,line2,line3,line4,line5);
+          };
         });
       });
     </script>
